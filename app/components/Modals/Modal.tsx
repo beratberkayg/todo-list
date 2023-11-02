@@ -35,6 +35,7 @@ const Modal: React.FC<ModalProps> = ({
           <div className="text-xl ">{title}</div>
           <GrClose onClick={closeFunc} cursor={"pointer"} size={25} />
         </div>
+        <div>{bodyElement}</div>
         <Button onSubmit={submitFunc} btnLabel={btnLabel} />
       </div>
     </div>

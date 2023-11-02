@@ -1,10 +1,9 @@
-"use client";
 import "../styles/globals.css";
 import { Nunito } from "next/font/google";
 import Navbar from "./components/Header/Navbar";
 import Footer from "./components/Footer/Footer";
 import MountedClient from "./components/MountedClient";
-import Modal from "./components/Modals/Modal";
+import RegisterModal from "./components/Modals/RegisterModal";
 
 const font = Nunito({
   subsets: ["latin"],
@@ -16,13 +15,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
     <html lang="en">
       <body className={font.className}>
         <MountedClient>
-          <Modal
-            isOpen
-            onSubmit={() => {}}
-            onClose={() => {}}
-            btnLabel="Kayıt Ol"
-            title="Kayıt Ol"
-          />
+          <RegisterModal />
           <Navbar />
         </MountedClient>
         {children}
