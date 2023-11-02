@@ -1,3 +1,4 @@
+"use client";
 import "../styles/globals.css";
 import { Nunito } from "next/font/google";
 import Navbar from "./components/Header/Navbar";
@@ -15,7 +16,13 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
     <html lang="en">
       <body className={font.className}>
         <MountedClient>
-          <Modal />
+          <Modal
+            isOpen
+            onSubmit={() => {}}
+            onClose={() => {}}
+            btnLabel="Kayıt Ol"
+            title="Kayıt Ol"
+          />
           <Navbar />
         </MountedClient>
         {children}

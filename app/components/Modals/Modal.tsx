@@ -1,9 +1,42 @@
 "use client";
+import Button from "@/app/buttons/Button";
+import { GrClose } from "react-icons/gr";
 
-const Modal = () => {
+type ModalProps = {
+  isOpen: boolean;
+  onClose: () => void;
+  onSubmit: () => void;
+  btnLabel: string;
+  title: string;
+  bodyElement: React.ReactElement;
+  footerElement: React.ReactElement;
+};
+
+const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  onClose,
+  onSubmit,
+  btnLabel,
+  title,
+  bodyElement,
+  footerElement,
+}) => {
+  const closeFunc = () => {
+    onClose();
+  };
+  const submitFunc = () => {
+    onSubmit();
+  };
+
   return (
-    <div className="h-screen w-full bg-black bg-opacity-50 flex items-center justify-center absolute left-0 top-0">
-      <div className=""></div>
+    <div className="h-full w-full bg-black bg-opacity-50 flex items-center justify-center absolute left-0 top-0">
+      <div className="bg-white rounded-lg p-5 w-1/2">
+        <div className="flex items-center justify-between pb-3 mb-3 border-b-2 ">
+          <div className="text-xl ">{title}</div>
+          <GrClose onClick={closeFunc} cursor={"pointer"} size={25} />
+        </div>
+        <Button onSubmit={submitFunc} btnLabel={btnLabel} />
+      </div>
     </div>
   );
 };
