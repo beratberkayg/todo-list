@@ -2,6 +2,8 @@
 import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 import Modal from "./Modal";
 import Input from "../Inputs/Input";
+import Button from "../buttons/Button";
+import { FcGoogle } from "react-icons/fc";
 
 const RegisterModal = () => {
   const {
@@ -9,8 +11,17 @@ const RegisterModal = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<FieldValues>();
-  const onSubmit: SubmitHandler<FieldValues> = (data) => console.log(data);
+  } = useForm<FieldValues>({
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+    },
+  });
+
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    console.log(data);
+  };
 
   const bodyElement = (
     <div>
@@ -40,12 +51,24 @@ const RegisterModal = () => {
       />
     </div>
   );
+
+  const footerElement = (
+    <div className="mt-3">
+      <Button
+        btnLabel="Google ile Giriş"
+        outline
+        icon={FcGoogle}
+        onSubmit={() => {}}
+      />
+    </div>
+  );
   return (
     <div>
       <Modal
+        footerElement={footerElement}
         bodyElement={bodyElement}
         isOpen
-        onSubmit={() => {}}
+        onSubmit={handleSubmit(onSubmit)}
         onClose={() => {}}
         btnLabel="Kayıt Ol"
         title="Kayıt Ol"

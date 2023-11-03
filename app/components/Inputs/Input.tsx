@@ -1,12 +1,12 @@
 "use client";
 
-import { useFormRegister, FieldErrors, FieldValues } from "react-hook-form";
+import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 
 type InputProps = {
   id: string;
   type: string;
   placeholder: string;
-  register: useFormRegister<FieldValues>;
+  register: UseFormRegister<FieldValues>;
   errors: FieldErrors;
   required: boolean;
 };
@@ -20,14 +20,16 @@ const Input: React.FC<InputProps> = ({
   required,
 }) => {
   return (
-    <div className="w-full h-14 my-10 flex justify-center flex-col">
-      <label className="cursor-pointer" htmlFor={id}>
-        {placeholder} :
+    <div className="w-full h-14 my-10 flex justify-center flex-col text-lg">
+      <label className="cursor-pointer pl-2" htmlFor={id}>
+        {placeholder}
       </label>
       <input
         className={`${
-          errors[id] ? "border border-red-500" : "border-2 border-gray-200"
-        }  w-full py-3 text-lg rounded-xl pl-3 `}
+          errors[id]
+            ? "border border-red-500 text-red-400"
+            : "border-2 border-gray-200"
+        }  w-full py-3 text-lg rounded-xl pl-3 outline-none `}
         {...(register(id), { required })}
         placeholder={placeholder}
         id={id}

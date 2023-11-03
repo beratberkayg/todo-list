@@ -16,14 +16,17 @@ const Button: React.FC<ButtonProps> = ({
   icon: Icon,
 }) => {
   return (
-    <button
-      className={` px-5 py-1 text-lg rounded-xl w-full ${
-        outline ? "border border-black" : " bg-emerald-500 text-white"
-      } `}
-    >
-      {Icon && <Icon size={25} />}
-      {btnLabel}
-    </button>
+    <div className="relative">
+      <button
+        onClick={onSubmit}
+        className={` px-5 py-2 text-lg rounded-xl w-full ${
+          outline ? "border border-black" : " bg-emerald-500 text-white"
+        } `}
+      >
+        {Icon && <Icon className="absolute" size={25} />}
+        {btnLabel}
+      </button>
+    </div>
   );
 };
 
