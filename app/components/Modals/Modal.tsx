@@ -27,6 +27,7 @@ const Modal: React.FC<ModalProps> = ({
   };
   const submitFunc = () => {
     onSubmit();
+
     console.log("heloooo");
   };
 

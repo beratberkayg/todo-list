@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import modalSlice from "./modalSlice";
+import todoSlice from "./todoSlice";
 
 export const store = configureStore({
   reducer: {
     modal: modalSlice,
+    todos: todoSlice,
   },
 });
 
