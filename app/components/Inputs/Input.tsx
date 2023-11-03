@@ -25,14 +25,12 @@ const Input: React.FC<InputProps> = ({
         {placeholder}
       </label>
       <input
+        id={id}
         className={`${
-          errors[id]
-            ? "border border-red-500 text-red-400"
-            : "border-2 border-gray-200"
+          errors[id] ? "border border-red-500" : "border-2 border-gray-200"
         }  w-full py-3 text-lg rounded-xl pl-3 outline-none `}
         {...(register(id), { required })}
         placeholder={placeholder}
-        id={id}
         type={type}
       />
     </div>

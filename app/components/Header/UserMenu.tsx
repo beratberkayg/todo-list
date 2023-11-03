@@ -6,10 +6,13 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import UserMenuItem from "./UserMenuItem";
 
 import { AiOutlineLogin, AiOutlineUserAdd } from "react-icons/ai";
+import { useAppDispatch } from "@/app/redux/hooks";
+import { loginModalFunch, registerModalFunc } from "@/app/redux/modalSlice";
 
 const UserMenu = () => {
   const [openMenu, setOpenMenu] = useState(false);
   console.log(openMenu);
+  const dispatch = useAppDispatch();
 
   return (
     <div
@@ -30,12 +33,16 @@ const UserMenu = () => {
         <div className="absolute bg-slate-400 shadow-orange-300 w-[150px] top-16 right-2 rounded-md p-3 flex flex-col tracking-wide items-center  ">
           <UserMenuItem
             name="Giriş Yap"
-            onClick={() => {}}
+            onClick={() => {
+              dispatch(loginModalFunch());
+            }}
             icon={AiOutlineLogin}
           />
           <UserMenuItem
             name="Kayıt Ol"
-            onClick={() => {}}
+            onClick={() => {
+              dispatch(registerModalFunc());
+            }}
             icon={AiOutlineUserAdd}
           />
         </div>

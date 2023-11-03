@@ -4,6 +4,8 @@ import Modal from "./Modal";
 import Input from "../Inputs/Input";
 import Button from "../buttons/Button";
 import { FcGoogle } from "react-icons/fc";
+import { useAppDispatch, useAppSelector } from "@/app/redux/hooks";
+import { registerModalFunc } from "@/app/redux/modalSlice";
 
 const RegisterModal = () => {
   const {
@@ -18,6 +20,8 @@ const RegisterModal = () => {
       password: "",
     },
   });
+  const { registerModal } = useAppSelector((state) => state.modal);
+  const dispatch = useAppDispatch();
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     console.log(data);
@@ -67,9 +71,11 @@ const RegisterModal = () => {
       <Modal
         footerElement={footerElement}
         bodyElement={bodyElement}
-        isOpen
+        isOpen={registerModal}
         onSubmit={handleSubmit(onSubmit)}
-        onClose={() => {}}
+        onClose={() => {
+          dispatch(registerModalFunc());
+        }}
         btnLabel="Kayıt Ol"
         title="Kayıt Ol"
       />

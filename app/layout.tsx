@@ -4,6 +4,7 @@ import Navbar from "./components/Header/Navbar";
 import Footer from "./components/Footer/Footer";
 import MountedClient from "./components/MountedClient";
 import RegisterModal from "./components/Modals/RegisterModal";
+import ReduxProvider from "./providers/ReduxProvider";
 
 const font = Nunito({
   subsets: ["latin"],
@@ -14,12 +15,14 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en">
       <body className={font.className}>
-        <MountedClient>
-          <RegisterModal />
-          <Navbar />
-        </MountedClient>
-        {children}
-        <Footer />
+        <ReduxProvider>
+          <MountedClient>
+            <RegisterModal />
+            <Navbar />
+          </MountedClient>
+          {children}
+          <Footer />
+        </ReduxProvider>
       </body>
     </html>
   );
