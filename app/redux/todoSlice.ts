@@ -21,12 +21,18 @@ export const todoSlice = createSlice({
       };
       state.push(newTodo);
     },
-    removeTodo: (state , action : PayloadAction<number>){
-      return state.toSorted.id
-    }
+    removeTodo: (state, action: PayloadAction<number>) => {
+      return state.filter((todo) => todo.id !== action.payload);
+    },
+    completedTodo: (state, action: PayloadAction<number>) => {
+      const todoUpdate = state.find((todo) => todo.id === action.payload);
+      if (todoUpdate) {
+        todoUpdate.completed = !todoUpdate.completed;
+      }
+    },
   },
 });
 
-export const { addTodo, removeTodo } = todoSlice.actions;
+export const { addTodo, removeTodo, completedTodo } = todoSlice.actions;
 
 export default todoSlice.reducer;

@@ -3,7 +3,7 @@ import { BsFillTrashFill } from "react-icons/bs";
 import { AiOutlineCheck } from "react-icons/ai";
 import { useAppDispatch, useAppSelector } from "@/app/redux/hooks";
 import { AppDispatch } from "@/app/redux/store";
-import { addTodo, removeTodo } from "@/app/redux/todoSlice";
+import { addTodo, removeTodo, completedTodo } from "@/app/redux/todoSlice";
 
 import { useState } from "react";
 
@@ -20,6 +20,9 @@ const Todo: React.FC = () => {
 
   const removeTodoFunc = (id: number) => {
     dispatch(removeTodo(id));
+  };
+  const completedTodoFunc = (id: number) => {
+    dispatch(completedTodo(id));
   };
 
   console.log(todos);
@@ -45,7 +48,11 @@ const Todo: React.FC = () => {
       </div>
       <div className="w-full">
         {todos.map((todo) => (
-          <div className=" flex justify-between items-center w-[90%] mx-auto  bg-white my-3 rounded-lg py-2 px-3 ">
+          <div
+            className={` flex justify-between items-center w-[90%] mx-auto  bg-white my-3 rounded-lg py-2 px-3 ${
+              todo.completed ? " bg-green-600 line-through  " : ""
+            } `}
+          >
             <li
               className="list-none text-2xl truncate w-full"
               style={{ whiteSpace: "pre-wrap", wordWrap: "break-word" }}
@@ -53,8 +60,11 @@ const Todo: React.FC = () => {
             >
               {todo.title}
             </li>
-            <div className="flex gap-7 border border-black py-3 px-5 rounded-md">
-              <AiOutlineCheck cursor={"pointer"} />
+            <div className="flex gap-3 ">
+              <AiOutlineCheck
+                onClick={() => completedTodoFunc(todo.id)}
+                cursor={"pointer"}
+              />
               <BsFillTrashFill
                 onClick={() => removeTodoFunc(todo.id)}
                 cursor={"pointer"}
