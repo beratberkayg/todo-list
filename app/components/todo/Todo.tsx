@@ -28,9 +28,9 @@ const Todo: React.FC = () => {
   console.log(todos);
 
   return (
-    <div className=" bg-red-400 min-h-[400px] w-2/3 mt-10 mb-10 rounded-lg shadow-xl flex flex-col items-center gap-5 pt-7 pb-7">
+    <div className=" bg-slate-500 min-h-[400px] w-2/3 mt-10 mb-10 rounded-lg shadow-xl flex flex-col items-center gap-5 pt-7 pb-7">
       <h2 className="text-2xl">Yapılacaklar Listem</h2>
-      <div className="w-[90%] mx-auto flex bg-amber-400 rounded-md">
+      <div className="w-[90%] mx-auto flex bg-slate-200 rounded-md">
         <input
           type="text"
           className="w-full  bg-transparent pl-3 outline-none"
@@ -41,7 +41,7 @@ const Todo: React.FC = () => {
         />
         <button
           onClick={addTodoFunc}
-          className=" bg-lime-500 rounded-md border border-black px-5 py-1 text-xl hover:bg-teal-300 "
+          className=" bg-slate-200 rounded-md border border-black px-5 py-1 text-xl hover:bg-white hover:text-black"
         >
           Ekle
         </button>
@@ -61,14 +61,20 @@ const Todo: React.FC = () => {
               {todo.title}
             </li>
             <div className="flex gap-3 ">
-              <AiOutlineCheck
-                onClick={() => completedTodoFunc(todo.id)}
-                cursor={"pointer"}
-              />
-              <BsFillTrashFill
-                onClick={() => removeTodoFunc(todo.id)}
-                cursor={"pointer"}
-              />
+              <div className={` ${todo.completed ? "text-red-600" : ""}`}>
+                <AiOutlineCheck
+                  onClick={() => completedTodoFunc(todo.id)}
+                  cursor={"pointer"}
+                  size={25}
+                />
+              </div>
+              <div>
+                <BsFillTrashFill
+                  onClick={() => removeTodoFunc(todo.id)}
+                  cursor={"pointer"}
+                  size={25}
+                />
+              </div>
             </div>
           </div>
         ))}
