@@ -1,29 +1,31 @@
 "use client";
-
-import { useAppDispatch } from "@/app/redux/hooks";
+import { BsFillTrashFill } from "react-icons/bs";
+import { AiOutlineCheck } from "react-icons/ai";
+import { useAppDispatch, useAppSelector } from "@/app/redux/hooks";
 import { AppDispatch } from "@/app/redux/store";
-import { addTodo } from "@/app/redux/todoSlice";
-import { title } from "process";
+import { addTodo, removeTodo } from "@/app/redux/todoSlice";
+
 import { useState } from "react";
-import { SubmitHandler } from "react-hook-form";
 
 const Todo: React.FC = () => {
+  const todos = useAppSelector((state) => state.todos);
+
   const [value, setValue] = useState<string>("");
   const dispatch: AppDispatch = useAppDispatch();
 
-  const { todos } = useAppSelector((state) => state.modal);
-
-  const onSubmit = (e: React.FormEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    if (value.trim() !== "") {
-      dispatch(addTodo(
-        title : value
-      ));
-      setValue("");
-    }
+  const addTodoFunc = () => {
+    dispatch(addTodo(value));
+    setValue("");
   };
+
+  const removeTodoFunc = (id: number) => {
+    dispatch(removeTodo(id));
+  };
+
+  console.log(todos);
+
   return (
-    <div className=" bg-red-400 min-h-[400px] w-2/3 mt-10 rounded-lg shadow-xl flex flex-col items-center gap-5 pt-7">
+    <div className=" bg-red-400 min-h-[400px] w-2/3 mt-10 mb-10 rounded-lg shadow-xl flex flex-col items-center gap-5 pt-7 pb-7">
       <h2 className="text-2xl">Yapılacaklar Listem</h2>
       <div className="w-[90%] mx-auto flex bg-amber-400 rounded-md">
         <input
@@ -34,9 +36,32 @@ const Todo: React.FC = () => {
           }}
           value={value}
         />
-        <button className=" bg-lime-500 rounded-md border border-black px-5 py-1 text-xl hover:bg-teal-300 ">
+        <button
+          onClick={addTodoFunc}
+          className=" bg-lime-500 rounded-md border border-black px-5 py-1 text-xl hover:bg-teal-300 "
+        >
           Ekle
         </button>
+      </div>
+      <div className="w-full">
+        {todos.map((todo) => (
+          <div className=" flex justify-between items-center w-[90%] mx-auto  bg-white my-3 rounded-lg py-2 px-3 ">
+            <li
+              className="list-none text-2xl truncate w-full"
+              style={{ whiteSpace: "pre-wrap", wordWrap: "break-word" }}
+              key={todo.id}
+            >
+              {todo.title}
+            </li>
+            <div className="flex gap-7 border border-black py-3 px-5 rounded-md">
+              <AiOutlineCheck cursor={"pointer"} />
+              <BsFillTrashFill
+                onClick={() => removeTodoFunc(todo.id)}
+                cursor={"pointer"}
+              />
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

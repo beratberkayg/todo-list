@@ -15,7 +15,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   /* navbar useclient olduğu için MountedClient ile sarmaladım */
   return (
     <html lang="en">
-      <body className="{font.className} min-h-screen">
+      <body className="{font.className} min-h-screen ">
         <ReduxProvider>
           <MountedClient>
             <LoginModal />
