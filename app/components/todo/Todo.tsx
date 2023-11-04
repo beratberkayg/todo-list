@@ -14,6 +14,9 @@ const Todo: React.FC = () => {
   const dispatch: AppDispatch = useAppDispatch();
 
   const addTodoFunc = () => {
+    if (value === "") {
+      return alert("Lütfen bir metin giriniz...");
+    }
     dispatch(addTodo(value));
     setValue("");
   };
@@ -50,7 +53,7 @@ const Todo: React.FC = () => {
         {todos.map((todo) => (
           <div
             className={` flex justify-between items-center w-[90%] mx-auto  bg-white my-3 rounded-lg py-2 px-3 ${
-              todo.completed ? " bg-green-600 line-through  " : ""
+              todo.completed ? " bg-green-500 line-through" : ""
             } `}
           >
             <li
